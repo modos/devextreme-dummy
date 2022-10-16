@@ -1,16 +1,11 @@
 <template>
-   <DxDataGrid id="dataGrid">
-            <!-- Configuration goes here -->
-        </DxDataGrid>
+  <Grid style="margin: 64px;"/>
 </template>
 
 <script>
-import 'devextreme/dist/css/dx.light.css';
-import { DxDataGrid } from 'devextreme-vue/data-grid';
+import Grid from "../components/Grid.vue";
 export default {
-  name: 'IndexPage',
-  components: {
-        DxDataGrid
-    }
+    name: "IndexPage",
+    components: { Grid }
 }
 </script>
