@@ -1,9 +1,6 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
-  router: {
-    base: '/devextreme-dummy/dist'
-  },
+  target: 'static'
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'devextreme',
