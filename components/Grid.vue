@@ -24,7 +24,7 @@
       template="masterDetailTemplate"
     />
     <template #masterDetailTemplate="{ data: orders }">
-      <DetailTemplate
+      <NestedTemplate
         :template-data="orders"
       />
     </template>
@@ -45,6 +45,7 @@ import { DxLoadPanel } from 'devextreme-vue/load-panel';
 import { mapGetters, mapActions } from 'vuex';
 
 import 'devextreme/dist/css/dx.light.css';
+import NestedTemplate from './NestedTemplate.vue';
 
 export default {
   components: {
@@ -55,8 +56,9 @@ export default {
     DxSorting,
     DxRowDragging,
     DxMasterDetail,
-    DxSearchPanel
-  },
+    DxSearchPanel,
+    NestedTemplate
+},
   data() {
     return {
       loadPanelPosition: { of: '#gridContainer' },
@@ -112,9 +114,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-#gridContainer {
-  height: 440px;
-}
-</style>
 
