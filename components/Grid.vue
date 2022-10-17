@@ -12,12 +12,22 @@
       :repaint-changes-only="true"
       @saving="onSaving"
     >
+    <DxSearchPanel :visible="true" />
     <DxRowDragging
         :allow-reordering="true"
         :on-reorder="onReorder"
         :show-drag-icons="true"
       />
       <DxSorting mode="multiple"/>
+      <DxMasterDetail
+      :enabled="true"
+      template="masterDetailTemplate"
+    />
+    <template #masterDetailTemplate="{ data: orders }">
+      <DetailTemplate
+        :template-data="orders"
+      />
+    </template>
       <DxEditing
         mode="row"
         :allow-adding="true"
@@ -30,7 +40,7 @@
   </div>
 </template>
 <script>
-import { DxDataGrid, DxColumn, DxEditing, DxSorting, DxRowDragging } from 'devextreme-vue/data-grid';
+import { DxDataGrid, DxColumn, DxEditing, DxSorting, DxRowDragging, DxMasterDetail, DxSearchPanel } from 'devextreme-vue/data-grid';
 import { DxLoadPanel } from 'devextreme-vue/load-panel';
 import { mapGetters, mapActions } from 'vuex';
 
@@ -43,7 +53,9 @@ export default {
     DxEditing,
     DxLoadPanel,
     DxSorting,
-    DxRowDragging
+    DxRowDragging,
+    DxMasterDetail,
+    DxSearchPanel
   },
   data() {
     return {
