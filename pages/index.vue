@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Grid from "../components/Grid.vue";
+import Grid from "../components/Grid.vue"
 export default {
     name: "IndexPage",
     components: { Grid }

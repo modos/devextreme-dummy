@@ -1,88 +1,84 @@
-import 'whatwg-fetch';
 import applyChanges from 'devextreme/data/apply_changes'
-import { sendRequest } from '../assets/js/utils'
 import * as axios from '../assets/js/axios'
 
-const URL = 'https://js.devexpress.com/Demos/Mvc/api/DataGridWebApi';
-
 export const state = () => ({
-  orders: [],
+  products : [],
   changes: [],
   editRowKey: null,
   isLoading: false,
 })
 
 export const getters = {
-  orders(state) {
-    return state.orders;
+  products (state) {
+    return state.products
   },
   isLoading(state) {
-    return state.isLoading;
+    return state.isLoading
   },
 }
 
 export const mutations = {
   updateIsLoading(state, isLoading) {
-    state.isLoading = isLoading;
+    state.isLoading = isLoading
   },
 
   updateEditRowKey(state, editRowKey) {
-    state.editRowKey = editRowKey;
+    state.editRowKey = editRowKey
   },
 
   updateChanges(state, changes) {
-    state.changes = changes;
+    state.changes = changes
   },
 
-  updateOrders(state, { change, data }) {
+  updateProducts (state, { change, data }) {
     if (change) {
-      change.data = data;
-      state.orders = applyChanges(state.orders, [change], { keyExpr: 'id' });
+      change.data = data 
+      state.products  = applyChanges(state.products , [change], { keyExpr: 'id' })
     } else {
-      state.orders = data;
+      state.products  = data
     }
   },
 
   reOrder(state, data) {
-    state.orders = data
+    state.products  = data
   }
 }
 
 export const actions = {
   setEditRowKey(context, value) {
-    context.commit('updateEditRowKey', value);
+    context.commit('updateEditRowKey', value)
   },
 
   setChanges(context, value) {
-    context.commit('updateChanges', value);
+    context.commit('updateChanges', value)
   },
 
-  async loadOrders(context) {
-    context.commit('updateIsLoading', true);
+  async loadProducts (context) {
+    context.commit('updateIsLoading', true)
     try {
-      const { products } = await axios.getProducts();
-      console.log(products);
-      context.commit('updateOrders', { data: products });
+      const { products } = await axios.getProducts()
+      console.log(products) 
+      context.commit('updateProducts', { data: products })
     } finally {
-      context.commit('updateIsLoading', false);
+      context.commit('updateIsLoading', false)
     }
   },
 
   async insert(context, change) {
     const data = await axios.addProduct(change.data)
-    context.commit('updateOrders', { change, data })
+    context.commit('updateProducts', { change, data })
   },
 
   async update(context, change) {
-    console.log(change);
+    console.log(change) 
     const data = await axios.updateProduct(change.key, change.data)
 
-    context.commit('updateOrders', { change, data })
+    context.commit('updateProducts', { change, data })
   },
 
   async remove(context, change) {
     const data = await axios.deleteProduct(change.key)
-    context.commit('updateOrders', { change, data })
+    context.commit('updateProducts', { change, data })
   },
 
   reOrder(context, data) {
@@ -97,15 +93,15 @@ export const actions = {
         switch (change.type) {
           case 'insert':
             await dispatch('insert', change)
-            break;
+            break 
           case 'update':
             await dispatch('update', change)
-            break;
+            break 
           case 'remove':
             await dispatch('remove', change)
-            break;
+            break 
           default:
-            break;
+            break 
         }
       } finally {
         commit('updateIsLoading', false)

@@ -5,7 +5,7 @@
   </template>
   <script>
   
-  import { DxDataGrid, DxColumn } from 'devextreme-vue/data-grid';
+  import { DxDataGrid, DxColumn } from 'devextreme-vue/data-grid'
   
   export default {
     components: { DxDataGrid, DxColumn },
@@ -18,11 +18,9 @@
     data() {
       return {
         images: this.templateData.data.images
-      };
-    },
-    methods: {
-    },
-  };
+      }
+    }
+  }
   </script>
   <style>
   .master-detail-caption {

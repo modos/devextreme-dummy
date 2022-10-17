@@ -7,7 +7,7 @@
     <DxDataGrid
       id="gridContainer"
       key-expr="id"
-      :data-source="orders"
+      :data-source="products"
       :show-borders="false"
       :repaint-changes-only="true"
       @saving="onSaving"
@@ -23,9 +23,9 @@
       :enabled="true"
       template="masterDetailTemplate"
     />
-    <template #masterDetailTemplate="{ data: orders }">
+    <template #masterDetailTemplate="{ data: products  }">
       <NestedTemplate
-        :template-data="orders"
+        :template-data="products"
       />
     </template>
       <DxEditing
@@ -40,12 +40,12 @@
   </div>
 </template>
 <script>
-import { DxDataGrid, DxColumn, DxEditing, DxSorting, DxRowDragging, DxMasterDetail, DxSearchPanel } from 'devextreme-vue/data-grid';
-import { DxLoadPanel } from 'devextreme-vue/load-panel';
-import { mapGetters, mapActions } from 'vuex';
+import { DxDataGrid, DxColumn, DxEditing, DxSorting, DxRowDragging, DxMasterDetail, DxSearchPanel } from 'devextreme-vue/data-grid'
+import { DxLoadPanel } from 'devextreme-vue/load-panel'
+import { mapGetters, mapActions } from 'vuex'
 
-import 'devextreme/dist/css/dx.light.css';
-import NestedTemplate from './NestedTemplate.vue';
+import 'devextreme/dist/css/dx.light.css'
+import NestedTemplate from './NestedTemplate.vue'
 
 export default {
   components: {
@@ -62,24 +62,24 @@ export default {
   data() {
     return {
       loadPanelPosition: { of: '#gridContainer' },
-    };
+    }
   },
   computed: {
-    ...mapGetters(['orders', 'isLoading']),
+    ...mapGetters(['products', 'isLoading']),
     editRowKey: {
       get() {
-        return this.$store.state.editRowKey;
+        return this.$store.state.editRowKey
       },
       set(value) {
-        this.setEditRowKey(value);
+        this.setEditRowKey(value)
       },
     },
     changes: {
       get() {
-        return this.$store.state.changes;
+        return this.$store.state.changes
       },
       set(value) {
-        this.setChanges(value);
+        this.setChanges(value)
       },
     },
     changesText: {
@@ -88,30 +88,30 @@ export default {
           type: change.type,
           key: change.type !== 'insert' ? change.key : undefined,
           data: change.data,
-        })), null, ' ');
+        })), null, ' ')
       },
     },
   },
   beforeMount() {
-    this.loadOrders();
+    this.loadProducts()
   },
   methods: {
-    ...mapActions(['setEditRowKey', 'setChanges', 'loadOrders', 'insert', 'update', 'remove', 'saveChange']),
+    ...mapActions(['setEditRowKey', 'setChanges', 'loadProducts', 'insert', 'update', 'remove', 'saveChange']),
     onSaving(e) {
-      e.cancel = true;
-      e.promise = this.saveChange(e.changes[0]);
+      e.cancel = true
+      e.promise = this.saveChange(e.changes[0])
     },
     onReorder(e) {
-      const visibleRows = e.component.getVisibleRows();
-      const toIndex = this.orders.findIndex((item) => item.id === visibleRows[e.toIndex].data.id);
-      const fromIndex = this.orders.findIndex((item) => item.id === e.itemData.id);
-      const newTasks = [...this.orders];
+      const visibleRows = e.component.getVisibleRows()
+      const toIndex = this.products .findIndex((item) => item.id === visibleRows[e.toIndex].data.id)
+      const fromIndex = this.products .findIndex((item) => item.id === e.itemData.id)
+      const newProducts = [...this.products]
 
-      newTasks.splice(fromIndex, 1);
-      newTasks.splice(toIndex, 0, e.itemData);
-      this.$store.dispatch('reOrder', newTasks)
+      newProducts.splice(fromIndex, 1)
+      newProducts.splice(toIndex, 0, e.itemData)
+      this.$store.dispatch('reOrder', newProducts)
     },
   },
-};
+}
 </script>
 
