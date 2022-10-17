@@ -42,6 +42,10 @@ export const mutations = {
       state.orders = data;
     }
   },
+
+  reOrder(state, data) {
+    state.orders = data
+  }
 }
 
 export const actions = {
@@ -79,6 +83,10 @@ export const actions = {
   async remove(context, change) {
     const data = await axios.deleteProduct(change.key)
     context.commit('updateOrders', { change, data })
+  },
+
+  reOrder(context, data) {
+    context.commit('reOrder', data)
   },
 
   async saveChange({ commit, dispatch }, change) {

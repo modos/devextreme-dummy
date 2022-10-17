@@ -12,6 +12,11 @@
       :repaint-changes-only="true"
       @saving="onSaving"
     >
+    <DxRowDragging
+        :allow-reordering="true"
+        :on-reorder="onReorder"
+        :show-drag-icons="true"
+      />
       <DxSorting mode="multiple"/>
       <DxEditing
         mode="row"
@@ -25,7 +30,7 @@
   </div>
 </template>
 <script>
-import { DxDataGrid, DxColumn, DxEditing, DxSorting } from 'devextreme-vue/data-grid';
+import { DxDataGrid, DxColumn, DxEditing, DxSorting, DxRowDragging } from 'devextreme-vue/data-grid';
 import { DxLoadPanel } from 'devextreme-vue/load-panel';
 import { mapGetters, mapActions } from 'vuex';
 
@@ -37,7 +42,8 @@ export default {
     DxColumn,
     DxEditing,
     DxLoadPanel,
-    DxSorting
+    DxSorting,
+    DxRowDragging
   },
   data() {
     return {
@@ -80,6 +86,16 @@ export default {
     onSaving(e) {
       e.cancel = true;
       e.promise = this.saveChange(e.changes[0]);
+    },
+    onReorder(e) {
+      const visibleRows = e.component.getVisibleRows();
+      const toIndex = this.orders.findIndex((item) => item.id === visibleRows[e.toIndex].data.id);
+      const fromIndex = this.orders.findIndex((item) => item.id === e.itemData.id);
+      const newTasks = [...this.orders];
+
+      newTasks.splice(fromIndex, 1);
+      newTasks.splice(toIndex, 0, e.itemData);
+      this.$store.dispatch('reOrder', newTasks)
     },
   },
 };
