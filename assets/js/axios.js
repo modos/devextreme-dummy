@@ -8,3 +8,7 @@ const instance = axios.create({
 export async function getProducts() {
     return await (await instance.get('products')).data
 }
+
+export async function deleteProduct(id) {
+    return await (await instance.delete('products/' + id)).data
+}
