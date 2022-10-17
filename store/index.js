@@ -65,50 +65,45 @@ export const actions = {
   },
 
   async insert(context, change) {
-    const data = await sendRequest(`${URL}/InsertOrder`, 'POST', {
-      values: JSON.stringify(change.data),
-    });
-
-    context.commit('updateOrders', { change, data });
+    const data = await axios.addProduct(change.data)
+    context.commit('updateOrders', { change, data })
   },
 
   async update(context, change) {
-    const data = await sendRequest(`${URL}/UpdateOrder`, 'PUT', {
-      key: change.key,
-      values: JSON.stringify(change.data),
-    });
+    console.log(change);
+    const data = await axios.updateProduct(change.key, change.data)
 
-    context.commit('updateOrders', { change, data });
+    context.commit('updateOrders', { change, data })
   },
 
   async remove(context, change) {
-    const data = await axios.deleteProduct(change.key);
-    context.commit('updateOrders', { change, data });
+    const data = await axios.deleteProduct(change.key)
+    context.commit('updateOrders', { change, data })
   },
 
   async saveChange({ commit, dispatch }, change) {
     if (change && change.type) {
-      commit('updateIsLoading', true);
+      commit('updateIsLoading', true)
 
       try {
         switch (change.type) {
           case 'insert':
-            await dispatch('insert', change);
+            await dispatch('insert', change)
             break;
           case 'update':
-            await dispatch('update', change);
+            await dispatch('update', change)
             break;
           case 'remove':
-            await dispatch('remove', change);
+            await dispatch('remove', change)
             break;
           default:
             break;
         }
       } finally {
-        commit('updateIsLoading', false);
+        commit('updateIsLoading', false)
       }
     }
-    commit('updateEditRowKey', null);
-    commit('updateChanges', []);
+    commit('updateEditRowKey', null)
+    commit('updateChanges', [])
   },
 }

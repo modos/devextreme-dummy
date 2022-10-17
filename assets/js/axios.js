@@ -12,3 +12,15 @@ export async function getProducts() {
 export async function deleteProduct(id) {
     return await (await instance.delete('products/' + id)).data
 }
+
+export async function updateProduct(id, body) {
+    return await (await instance.put('products/' + id), body, {
+        headers: { 'Content-Type': 'application/json' },
+    }).data
+}
+
+export async function addProduct(data) {
+    return await (await instance.post('products/add', data, {
+        headers: { 'Content-Type': 'application/json' },
+    })).data
+}
