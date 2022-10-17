@@ -1,0 +1,1 @@
+window.__NUXT__=(function(a){return {staticAssetsBase:"devextreme-dummy\u002Fdist\u002F_nuxt\u002Fstatic\u002F1666007632",layout:"default",error:a,state:{products:[],changes:[],editRowKey:a,isLoading:false},serverRendered:true,routePath:"\u002F",config:{_app:{basePath:"devextreme-dummy\u002Fdist\u002F",assetsPath:"devextreme-dummy\u002Fdist\u002F_nuxt\u002F",cdnURL:a}}}}(null));
