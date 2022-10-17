@@ -12,6 +12,7 @@
       :repaint-changes-only="true"
       @saving="onSaving"
     >
+      <DxSorting mode="multiple"/>
       <DxEditing
         mode="row"
         :allow-adding="true"
@@ -24,7 +25,7 @@
   </div>
 </template>
 <script>
-import { DxDataGrid, DxColumn, DxEditing } from 'devextreme-vue/data-grid';
+import { DxDataGrid, DxColumn, DxEditing, DxSorting } from 'devextreme-vue/data-grid';
 import { DxLoadPanel } from 'devextreme-vue/load-panel';
 import { mapGetters, mapActions } from 'vuex';
 
@@ -36,6 +37,7 @@ export default {
     DxColumn,
     DxEditing,
     DxLoadPanel,
+    DxSorting
   },
   data() {
     return {
