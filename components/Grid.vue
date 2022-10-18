@@ -24,7 +24,7 @@ import { DxDataGrid, DxFilterRow, DxScrolling, DxGrouping, DxGroupPanel, DxColum
 import { DxLoadPanel } from 'devextreme-vue/load-panel'
 import { mapGetters, mapActions } from 'vuex'
 
-import 'devextreme/dist/css/dx.light.css'
+import 'devextreme/dist/css/dx.dark.css'
 import NestedTemplate from './NestedTemplate.vue'
 
 export default {
