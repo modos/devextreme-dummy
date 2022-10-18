@@ -19,6 +19,7 @@
         :show-drag-icons="true"
       />
       <DxSorting mode="multiple"/>
+      <DxFilterRow :visible="true" />
       <DxMasterDetail
       :enabled="true"
       template="masterDetailTemplate"
@@ -40,7 +41,7 @@
   </div>
 </template>
 <script>
-import { DxDataGrid, DxColumn, DxEditing, DxSorting, DxRowDragging, DxMasterDetail, DxSearchPanel } from 'devextreme-vue/data-grid'
+import { DxDataGrid, DxFilterRow, DxColumn, DxEditing, DxSorting, DxRowDragging, DxMasterDetail, DxSearchPanel } from 'devextreme-vue/data-grid'
 import { DxLoadPanel } from 'devextreme-vue/load-panel'
 import { mapGetters, mapActions } from 'vuex'
 
@@ -55,6 +56,7 @@ export default {
     DxLoadPanel,
     DxSorting,
     DxRowDragging,
+    DxFilterRow,
     DxMasterDetail,
     DxSearchPanel,
     NestedTemplate
