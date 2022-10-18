@@ -1,45 +1,21 @@
 <template>
   <div>
-    <DxLoadPanel
-      :position="loadPanelPosition"
-      :visible="isLoading"
-    />
-    <DxDataGrid
-      id="gridContainer"
-      key-expr="id"
-      :data-source="products"
-      :show-borders="false"
-      :repaint-changes-only="true"
-      @saving="onSaving"
-    >
-    <DxSearchPanel :visible="true" />
-    <DxScrolling mode="infinite" />
-    <DxRowDragging
-        :allow-reordering="true"
-        :on-reorder="onReorder"
-        :show-drag-icons="true"
-      />
-      <DxSorting mode="multiple"/>
+    <DxLoadPanel :position="loadPanelPosition" :visible="isLoading" />
+    <DxDataGrid id="gridContainer" key-expr="id" :data-source="products" :show-borders="false"
+      :repaint-changes-only="true" @saving="onSaving">
+      <DxSearchPanel :visible="true" />
+      <DxScrolling mode="infinite" />
+      <DxRowDragging :allow-reordering="true" :on-reorder="onReorder" :show-drag-icons="true" />
+      <DxSorting mode="multiple" />
       <DxFilterRow :visible="true" />
-      <DxGrouping :context-menu-enabled="true"/>
-      <DxGroupPanel :visible="true"/>
-      <DxMasterDetail
-      :enabled="true"
-      template="masterDetailTemplate"
-    />
-    <template #masterDetailTemplate="{ data: products  }">
-      <NestedTemplate
-        :template-data="products"
-      />
-    </template>
-      <DxEditing
-        mode="row"
-        :allow-adding="true"
-        :allow-deleting="true"
-        :allow-updating="true"
-        v-model:changes="changes"
-        v-model:edit-row-key="editRowKey"
-      />
+      <DxGrouping :context-menu-enabled="true" />
+      <DxGroupPanel :visible="true" />
+      <DxMasterDetail :enabled="true" template="masterDetailTemplate" />
+      <template #masterDetailTemplate="{ data: products  }">
+        <NestedTemplate :template-data="products" />
+      </template>
+      <DxEditing mode="row" :allow-adding="true" :allow-deleting="true" :allow-updating="true" v-model:changes="changes"
+        v-model:edit-row-key="editRowKey" />
     </DxDataGrid>
   </div>
 </template>
@@ -66,7 +42,7 @@ export default {
     DxMasterDetail,
     DxSearchPanel,
     NestedTemplate
-},
+  },
   data() {
     return {
       loadPanelPosition: { of: '#gridContainer' },
@@ -111,8 +87,8 @@ export default {
     },
     onReorder(e) {
       const visibleRows = e.component.getVisibleRows()
-      const toIndex = this.products .findIndex((item) => item.id === visibleRows[e.toIndex].data.id)
-      const fromIndex = this.products .findIndex((item) => item.id === e.itemData.id)
+      const toIndex = this.products.findIndex((item) => item.id === visibleRows[e.toIndex].data.id)
+      const fromIndex = this.products.findIndex((item) => item.id === e.itemData.id)
       const newProducts = [...this.products]
 
       newProducts.splice(fromIndex, 1)
