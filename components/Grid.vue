@@ -84,7 +84,6 @@ export default {
   methods: {
     ...mapActions(['setEditRowKey', 'setChanges', 'loadProducts', 'insert', 'update', 'remove', 'saveChange']),
     onSaving(e) {
-      console.log(e.changes);
       e.cancel = true
       e.promise = this.saveChange(e.changes[0])
     },

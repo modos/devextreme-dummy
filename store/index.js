@@ -70,7 +70,6 @@ export const actions = {
 
   async update(context, change) {
     const data = await axios.updateProduct(change.key, change.data)
-
     context.commit('updateProducts', { change, data })
   },
 
