@@ -11,6 +11,7 @@
       <DxGrouping :context-menu-enabled="true" />
       <DxGroupPanel :visible="true" />
       <DxMasterDetail :enabled="true" template="masterDetailTemplate" />
+      <DxColumnChooser :enabled="true" mode="dragAndDrop" />
       <template #masterDetailTemplate="{ data: products  }">
         <NestedTemplate :template-data="products" />
       </template>
@@ -20,7 +21,7 @@
   </div>
 </template>
 <script>
-import { DxDataGrid, DxFilterRow, DxScrolling, DxGrouping, DxGroupPanel, DxColumn, DxEditing, DxSorting, DxRowDragging, DxMasterDetail, DxSearchPanel } from 'devextreme-vue/data-grid'
+import { DxDataGrid, DxFilterRow, DxColumnChooser, DxScrolling, DxGrouping, DxGroupPanel, DxColumn, DxEditing, DxSorting, DxRowDragging, DxMasterDetail, DxSearchPanel } from 'devextreme-vue/data-grid'
 import { DxLoadPanel } from 'devextreme-vue/load-panel'
 import { mapGetters, mapActions } from 'vuex'
 
@@ -35,6 +36,7 @@ export default {
     DxLoadPanel,
     DxSorting,
     DxRowDragging,
+    DxColumnChooser,
     DxScrolling,
     DxFilterRow,
     DxGrouping,
@@ -82,6 +84,7 @@ export default {
   methods: {
     ...mapActions(['setEditRowKey', 'setChanges', 'loadProducts', 'insert', 'update', 'remove', 'saveChange']),
     onSaving(e) {
+      console.log(e.changes);
       e.cancel = true
       e.promise = this.saveChange(e.changes[0])
     },

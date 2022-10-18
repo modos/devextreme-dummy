@@ -56,8 +56,7 @@ export const actions = {
   async loadProducts (context) {
     context.commit('updateIsLoading', true)
     try {
-      const { products } = await axios.getProducts()
-      console.log(products) 
+      const { products } = await axios.getProducts() 
       context.commit('updateProducts', { data: products })
     } finally {
       context.commit('updateIsLoading', false)
@@ -70,7 +69,6 @@ export const actions = {
   },
 
   async update(context, change) {
-    console.log(change) 
     const data = await axios.updateProduct(change.key, change.data)
 
     context.commit('updateProducts', { change, data })
