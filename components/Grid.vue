@@ -13,6 +13,7 @@
       @saving="onSaving"
     >
     <DxSearchPanel :visible="true" />
+    <DxScrolling mode="infinite" />
     <DxRowDragging
         :allow-reordering="true"
         :on-reorder="onReorder"
@@ -20,6 +21,8 @@
       />
       <DxSorting mode="multiple"/>
       <DxFilterRow :visible="true" />
+      <DxGrouping :context-menu-enabled="true"/>
+      <DxGroupPanel :visible="true"/>
       <DxMasterDetail
       :enabled="true"
       template="masterDetailTemplate"
@@ -41,7 +44,7 @@
   </div>
 </template>
 <script>
-import { DxDataGrid, DxFilterRow, DxColumn, DxEditing, DxSorting, DxRowDragging, DxMasterDetail, DxSearchPanel } from 'devextreme-vue/data-grid'
+import { DxDataGrid, DxFilterRow, DxScrolling, DxGrouping, DxGroupPanel, DxColumn, DxEditing, DxSorting, DxRowDragging, DxMasterDetail, DxSearchPanel } from 'devextreme-vue/data-grid'
 import { DxLoadPanel } from 'devextreme-vue/load-panel'
 import { mapGetters, mapActions } from 'vuex'
 
@@ -56,7 +59,10 @@ export default {
     DxLoadPanel,
     DxSorting,
     DxRowDragging,
+    DxScrolling,
     DxFilterRow,
+    DxGrouping,
+    DxGroupPanel,
     DxMasterDetail,
     DxSearchPanel,
     NestedTemplate
